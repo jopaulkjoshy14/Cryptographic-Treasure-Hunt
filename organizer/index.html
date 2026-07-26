@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Organizer Portal | Cryptographic Treasure Hunt</title>
+
+    <link rel="icon" href="../assets/favicon.ico">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="../shared/styles.css">
+</head>
+
+<body>
+
+    <div class="container py-5">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-10">
+
+                <div class="card shadow-lg">
+
+                    <div class="card-header text-center">
+
+                        <h1 class="mb-2">
+                            🔐 Cryptographic Treasure Hunt
+                        </h1>
+
+                        <h4 class="mb-1">
+                            Organizer Portal
+                        </h4>
+
+                        <p class="mb-0">
+                            Create encrypted clues for participants using AES-256-GCM.
+                        </p>
+
+                    </div>
+
+                    <div class="card-body p-4">
+
+                        <!-- Secret Message -->
+                        <div class="mb-4">
+
+                            <label for="message" class="form-label">
+                                Secret Message
+                            </label>
+
+                            <textarea
+                                id="message"
+                                class="form-control"
+                                rows="5"
+                                placeholder="Enter the clue..."></textarea>
+
+                        </div>
+
+                        <!-- Secret Key -->
+                        <div class="mb-4">
+
+                            <label for="key" class="form-label">
+                                Secret Key
+                            </label>
+
+                            <input
+                                type="text"
+                                id="key"
+                                class="form-control"
+                                placeholder="Enter the secret key">
+
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex gap-2 mb-4">
+
+                            <button
+                                id="encryptBtn"
+                                class="btn btn-primary">
+
+                                <i class="bi bi-lock-fill"></i>
+                                Encrypt
+
+                            </button>
+
+                            <button
+                                id="clearBtn"
+                                class="btn btn-outline-secondary">
+
+                                <i class="bi bi-arrow-clockwise"></i>
+                                Clear
+
+                            </button>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- Results -->
+                        <div id="resultSection" class="d-none">
+
+                            <h3 class="mb-4">
+                                Encryption Result
+                            </h3>
+
+                            <!-- Ciphertext -->
+                            <div class="mb-5">
+
+                                <label class="form-label">
+                                    Ciphertext
+                                </label>
+
+                                <textarea
+                                    id="ciphertext"
+                                    class="form-control"
+                                    rows="6"
+                                    readonly></textarea>
+
+                                <button
+                                    id="copyCipherBtn"
+                                    class="btn btn-success mt-3">
+
+                                    <i class="bi bi-clipboard"></i>
+                                    Copy Ciphertext
+
+                                </button>
+
+                                <div
+                                    id="cipherQr"
+                                    class="mt-4 text-center">
+                                </div>
+
+                            </div>
+
+                            <!-- Key -->
+                            <div>
+
+                                <label class="form-label">
+                                    Secret Key
+                                </label>
+
+                                <input
+                                    id="displayKey"
+                                    class="form-control"
+                                    readonly>
+
+                                <button
+                                    id="copyKeyBtn"
+                                    class="btn btn-success mt-3">
+
+                                    <i class="bi bi-clipboard"></i>
+                                    Copy Key
+
+                                </button>
+
+                                <div
+                                    id="keyQr"
+                                    class="mt-4 text-center">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer class="text-center py-4">
+
+        Cryptographic Treasure Hunt
+
+        <br>
+
+        Powered by AES-256-GCM
+
+    </footer>
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- QRCode.js -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+
+    <!-- Organizer Logic -->
+    <script type="module" src="./app.js"></script>
+
+</body>
+
+</html>
