@@ -25,21 +25,36 @@ const PBKDF2_ITERATIONS = 100000;
 
 /**
  * Convert Uint8Array/ArrayBuffer to Base64
+ * (Mobile-safe implementation)
  */
 function toBase64(buffer) {
-    return btoa(
-        String.fromCharCode(...new Uint8Array(buffer))
-    );
+
+    const bytes = new Uint8Array(buffer);
+
+    let binary = "";
+
+    for (let i = 0; i < bytes.length; i++) {
+        binary += String.fromCharCode(bytes[i]);
+    }
+
+    return btoa(binary);
 }
 
 /**
  * Convert Base64 to Uint8Array
+ * (Mobile-safe implementation)
  */
 function fromBase64(base64) {
-    return Uint8Array.from(
-        atob(base64),
-        c => c.charCodeAt(0)
-    );
+
+    const binary = atob(base64);
+
+    const bytes = new Uint8Array(binary.length);
+
+    for (let i = 0; i < binary.length; i++) {
+        bytes[i] = binary.charCodeAt(i);
+    }
+
+    return bytes;
 }
 
 /**
@@ -148,4 +163,4 @@ export async function decrypt(encryptedData, password) {
     );
 
     return decoder.decode(decrypted);
-      }
+}
