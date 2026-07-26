@@ -17,6 +17,8 @@ const copyKeyBtn = document.getElementById("copyKeyBtn");
 const cipherQr = document.getElementById("cipherQr");
 const keyQr = document.getElementById("keyQr");
 
+console.log("App loaded");
+console.log("QRCode =", typeof QRCode);
 /**
  * Encrypt button
  */
