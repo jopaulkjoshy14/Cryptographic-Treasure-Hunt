@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#315efb">
+    <title>Organizer Portal | Cryptographic Treasure Hunt</title>
+
+    <link rel="icon" href="../assets/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../shared/styles.css">
+</head>
+
+<body>
+<div class="page-shell">
+
+    <div class="brand-bar">
+        <div class="brand">
+            <div class="brand-mark"><i class="bi bi-shield-lock-fill"></i></div>
+            <span>Cryptographic Treasure Hunt</span>
+        </div>
+        <div class="role-badge">
+            <i class="bi bi-person-gear"></i>
+            Organizer Portal
+        </div>
+    </div>
+
+    <main class="hero-card">
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-eyebrow">
+                    <i class="bi bi-lock-fill"></i>
+                    Clue Generator
+                </div>
+                <h1>Create a cryptographic clue</h1>
+                <p>
+                    Enter your secret message and key, encrypt them locally in the browser,
+                    then distribute the resulting ciphertext and key separately through your treasure hunt.
+                </p>
+            </div>
+        </section>
+
+        <section class="card-body">
+            <div class="section-heading">
+                <h2>Prepare your clue</h2>
+                <p>Nothing is uploaded to a server. Encryption happens in this browser.</p>
+            </div>
+
+            <div class="desktop-two-column">
+                <div>
+                    <div class="mb-4">
+                        <label for="message" class="form-label">Secret Message</label>
+                        <textarea id="message" class="form-control" rows="5"
+                                  placeholder="Enter the clue participants should discover..."></textarea>
+                        <div class="input-hint">This becomes the plaintext revealed after successful decryption.</div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="key" class="form-label">Secret Key</label>
+                        <input type="text" id="key" class="form-control"
+                               placeholder="Enter the key participants must discover">
+                        <div class="input-hint">Keep this separate from the ciphertext during the hunt.</div>
+                    </div>
+
+                    <div class="action-row">
+                        <button id="encryptBtn" class="btn btn-primary">
+                            <i class="bi bi-lock-fill"></i> Encrypt Clue
+                        </button>
+                        <button id="clearBtn" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-counterclockwise"></i> Clear
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="info-strip mt-0">
+                        <div class="info-item">
+                            <i class="bi bi-shield-check"></i>
+                            <span>AES-256-GCM</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="bi bi-browser-chrome"></i>
+                            <span>Browser-side</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="bi bi-cloud-slash"></i>
+                            <span>No storage</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 p-3 rounded-4 border bg-light">
+                        <div class="fw-bold mb-1">
+                            <i class="bi bi-lightbulb me-1"></i> Treasure-hunt tip
+                        </div>
+                        <div class="small text-secondary">
+                            Place the ciphertext and key in different locations or clues so participants
+                            need to discover both before they can reveal the message.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="resultSection" class="result-panel d-none">
+                <div class="section-heading">
+                    <h2>Ready to distribute</h2>
+                    <p>Use either the QR code or copy the value directly.</p>
+                </div>
+
+                <div class="result-grid">
+                    <section class="result-card">
+                        <div class="result-card-header">
+                            <div>
+                                <h3>Ciphertext</h3>
+                                <div class="small text-secondary mt-1">Give this to participants as one part of the hunt.</div>
+                            </div>
+                            <div class="result-icon"><i class="bi bi-file-lock2-fill"></i></div>
+                        </div>
+
+                        <textarea id="ciphertext" class="form-control readonly-output" rows="6" readonly></textarea>
+
+                        <div class="action-row mt-3">
+                            <button id="copyCipherBtn" class="btn btn-success">
+                                <i class="bi bi-clipboard"></i> Copy Ciphertext
+                            </button>
+                        </div>
+
+                        <div id="cipherQr" class="qr-panel" aria-label="Ciphertext QR code"></div>
+                    </section>
+
+                    <section class="result-card">
+                        <div class="result-card-header">
+                            <div>
+                                <h3>Secret Key</h3>
+                                <div class="small text-secondary mt-1">Keep this separate as the second discovery.</div>
+                            </div>
+                            <div class="result-icon"><i class="bi bi-key-fill"></i></div>
+                        </div>
+
+                        <input id="displayKey" class="form-control readonly-output" readonly>
+
+                        <div class="action-row mt-3">
+                            <button id="copyKeyBtn" class="btn btn-success">
+                                <i class="bi bi-clipboard"></i> Copy Key
+                            </button>
+                        </div>
+
+                        <div id="keyQr" class="qr-panel" aria-label="Secret key QR code"></div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-title">Cryptographic Treasure Hunt</div>
+        <div>Powered by AES-256-GCM • Client-side encryption</div>
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script type="module" src="./app.js"></script>
+</body>
+</html>
