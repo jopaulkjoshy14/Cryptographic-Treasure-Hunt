@@ -20,83 +20,82 @@ const scannerModal = new bootstrap.Modal(scannerModalElement);
 
 let html5QrCode = null;
 let activeInput = null;
+let scannerStarting = false;
 
 /* ---------------------------------------------------------- */
 /* Decrypt                                                    */
 /* ---------------------------------------------------------- */
 
 decryptBtn.addEventListener("click", async () => {
-
     const ciphertext = ciphertextInput.value.trim();
     const key = keyInput.value.trim();
 
     if (!ciphertext) {
         alert("Please enter or scan the ciphertext.");
+        ciphertextInput.focus();
         return;
     }
 
     if (!key) {
         alert("Please enter or scan the secret key.");
+        keyInput.focus();
         return;
     }
 
     try {
-
         decryptBtn.disabled = true;
-
         decryptBtn.innerHTML =
-            `<span class="spinner-border spinner-border-sm"></span> Decrypting...`;
+            `<span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span> Decrypting...`;
 
         const message = await decrypt(ciphertext, key);
 
         messageOutput.textContent = message;
-
         resultSection.classList.remove("d-none");
 
-        confetti({
-            particleCount: 150,
-            spread: 90,
-            origin: {
-                y: 0.6
-            }
+        resultSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
         });
 
-    }
-    catch (error) {
+        if (typeof confetti === "function") {
+            confetti({
+                particleCount: 150,
+                spread: 90,
+                origin: {
+                    y: 0.6
+                }
+            });
+        }
+    } catch (error) {
+        console.error("Decryption failed:", error);
 
-        console.error(error);
-
+        messageOutput.textContent = "";
         resultSection.classList.add("d-none");
 
         alert(
             "Decryption failed.\n\nCheck that both the ciphertext and the secret key are correct."
         );
-
-    }
-    finally {
-
+    } finally {
         decryptBtn.disabled = false;
-
         decryptBtn.innerHTML =
-            `<i class="bi bi-unlock-fill"></i> Decrypt`;
-
+            `<i class="bi bi-unlock-fill me-2"></i> Decrypt Clue`;
     }
-
 });
 
 /* ---------------------------------------------------------- */
 /* Clear                                                      */
 /* ---------------------------------------------------------- */
 
-clearBtn.addEventListener("click", () => {
+clearBtn.addEventListener("click", async () => {
+    await stopScanner();
 
     ciphertextInput.value = "";
     keyInput.value = "";
 
     messageOutput.textContent = "";
-
     resultSection.classList.add("d-none");
 
+    ciphertextInput.focus();
 });
 
 /* ---------------------------------------------------------- */
@@ -104,121 +103,138 @@ clearBtn.addEventListener("click", () => {
 /* ---------------------------------------------------------- */
 
 pasteCipherBtn.addEventListener("click", async () => {
+    const text = await readClipboardText();
 
-    try {
-
-        ciphertextInput.value =
-            await navigator.clipboard.readText();
-
-    }
-    catch {
-
-        alert("Clipboard access denied.");
-
+    if (text === null) {
+        alert("Clipboard access denied. Please paste the ciphertext manually.");
+        return;
     }
 
+    ciphertextInput.value = text;
+    ciphertextInput.focus();
 });
 
 pasteKeyBtn.addEventListener("click", async () => {
+    const text = await readClipboardText();
 
-    try {
-
-        keyInput.value =
-            await navigator.clipboard.readText();
-
-    }
-    catch {
-
-        alert("Clipboard access denied.");
-
+    if (text === null) {
+        alert("Clipboard access denied. Please paste the secret key manually.");
+        return;
     }
 
+    keyInput.value = text;
+    keyInput.focus();
 });
+
+async function readClipboardText() {
+    try {
+        if (!navigator.clipboard || !window.isSecureContext) {
+            return null;
+        }
+
+        return await navigator.clipboard.readText();
+    } catch (error) {
+        console.error("Clipboard read error:", error);
+        return null;
+    }
+}
 
 /* ---------------------------------------------------------- */
 /* QR Scanner                                                 */
 /* ---------------------------------------------------------- */
 
-scanCipherBtn.addEventListener("click", () => {
-
+scanCipherBtn.addEventListener("click", async () => {
     activeInput = ciphertextInput;
-
-    openScanner();
-
+    await openScanner();
 });
 
-scanKeyBtn.addEventListener("click", () => {
-
+scanKeyBtn.addEventListener("click", async () => {
     activeInput = keyInput;
-
-    openScanner();
-
+    await openScanner();
 });
 
 async function openScanner() {
+    if (scannerStarting || html5QrCode) {
+        return;
+    }
 
+    scannerStarting = true;
     scannerModal.show();
 
-    html5QrCode = new Html5Qrcode("reader");
-
     try {
+        html5QrCode = new Html5Qrcode("reader");
 
         await html5QrCode.start(
-
             {
                 facingMode: "environment"
             },
-
             {
                 fps: 10,
-                qrbox: 250
+                qrbox: {
+                    width: 250,
+                    height: 250
+                }
             },
-
             async decodedText => {
+                if (activeInput) {
+                    activeInput.value = decodedText;
+                    activeInput.focus();
+                }
 
-                activeInput.value = decodedText;
-
-                await html5QrCode.stop();
-
+                await stopScanner();
                 scannerModal.hide();
-
+            },
+            () => {
+                // Ignore individual QR scan misses.
             }
-
         );
+    } catch (error) {
+        console.error("QR scanner error:", error);
 
+        await stopScanner();
+        scannerModal.hide();
+
+        alert(
+            "Unable to access the camera. Please check camera permissions or enter the value manually."
+        );
+    } finally {
+        scannerStarting = false;
     }
-    catch (error) {
-
-        console.error(error);
-
-        alert("Unable to access the camera.");
-
-    }
-
 }
 
 /* ---------------------------------------------------------- */
-/* Stop camera when modal closes                             */
+/* Stop camera safely                                         */
+/* ---------------------------------------------------------- */
+
+async function stopScanner() {
+    if (!html5QrCode) {
+        return;
+    }
+
+    const activeScanner = html5QrCode;
+    html5QrCode = null;
+
+    try {
+        await activeScanner.stop();
+    } catch (error) {
+        console.warn("Scanner stop warning:", error);
+    }
+
+    try {
+        activeScanner.clear();
+    } catch (error) {
+        console.warn("Scanner clear warning:", error);
+    }
+}
+
+/* ---------------------------------------------------------- */
+/* Stop camera when modal closes                               */
 /* ---------------------------------------------------------- */
 
 scannerModalElement.addEventListener(
     "hidden.bs.modal",
     async () => {
-
-        if (html5QrCode) {
-
-            try {
-
-                await html5QrCode.stop();
-
-            }
-            catch {}
-
-            html5QrCode.clear();
-
-            html5QrCode = null;
-
-        }
-
+        await stopScanner();
+        activeInput = null;
     }
 );
