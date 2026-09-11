@@ -4,162 +4,380 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#315efb">
+
     <title>Organizer Portal | Cryptographic Treasure Hunt</title>
 
     <link rel="icon" href="../assets/favicon.ico">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+        rel="stylesheet"
+    >
+
     <link rel="stylesheet" href="../shared/styles.css">
 </head>
 
 <body>
 <div class="page-shell">
 
-    <div class="brand-bar">
-        <div class="brand">
-            <div class="brand-mark"><i class="bi bi-shield-lock-fill"></i></div>
-            <span>Cryptographic Treasure Hunt</span>
-        </div>
-        <div class="role-badge">
-            <i class="bi bi-person-gear"></i>
-            Organizer Portal
-        </div>
-    </div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg cth-navbar" aria-label="Main navigation">
+        <div class="container-fluid px-0">
 
-    <main class="hero-card">
-        <section class="hero">
-            <div class="hero-content">
-                <div class="hero-eyebrow">
+            <a class="navbar-brand cth-brand" href="../index.html">
+                <span class="cth-brand-icon">
+                    <i class="bi bi-shield-lock-fill"></i>
+                </span>
+
+                <span>
+                    <span class="cth-brand-text">Cryptographic Treasure Hunt</span>
+                    <span class="cth-brand-subtitle">Secure clue discovery</span>
+                </span>
+            </a>
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavigation"
+                aria-controls="mainNavigation"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <i class="bi bi-list"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavigation">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+
+                    <li class="nav-item">
+                        <a class="nav-link cth-nav-link" href="../index.html">
+                            <i class="bi bi-grid-1x2-fill me-1"></i>
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link cth-nav-link active"
+                            href="./index.html"
+                            aria-current="page"
+                        >
+                            <i class="bi bi-person-gear me-1"></i>
+                            Organizer
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link cth-nav-link" href="../participant/index.html">
+                            <i class="bi bi-person-check-fill me-1"></i>
+                            Participant
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link cth-nav-link" href="../about/index.html">
+                            <i class="bi bi-info-circle-fill me-1"></i>
+                            About
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page hero -->
+    <main class="page-content">
+
+        <section class="cth-page-hero">
+            <div>
+                <div class="cth-eyebrow">
                     <i class="bi bi-lock-fill"></i>
-                    Clue Generator
+                    Organizer workspace
                 </div>
+
                 <h1>Create a cryptographic clue</h1>
+
                 <p>
-                    Enter your secret message and key, encrypt them locally in the browser,
-                    then distribute the resulting ciphertext and key separately through your treasure hunt.
+                    Prepare a secret message, protect it with a key, and distribute
+                    the resulting ciphertext and key separately through your treasure hunt.
                 </p>
             </div>
+
+            <div class="cth-page-hero-badge">
+                <i class="bi bi-shield-check"></i>
+                <span>Encrypted locally</span>
+            </div>
         </section>
 
-        <section class="card-body">
-            <div class="section-heading">
-                <h2>Prepare your clue</h2>
-                <p>Nothing is uploaded to a server. Encryption happens in this browser.</p>
-            </div>
+        <!-- Main preparation panel -->
+        <section class="cth-panel">
 
-            <div class="desktop-two-column">
+            <div class="cth-panel-header">
                 <div>
-                    <div class="mb-4">
-                        <label for="message" class="form-label">Secret Message</label>
-                        <textarea id="message" class="form-control" rows="5"
-                                  placeholder="Enter the clue participants should discover..."></textarea>
-                        <div class="input-hint">This becomes the plaintext revealed after successful decryption.</div>
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="key" class="form-label">Secret Key</label>
-                        <input type="text" id="key" class="form-control"
-                               placeholder="Enter the key participants must discover">
-                        <div class="input-hint">Keep this separate from the ciphertext during the hunt.</div>
-                    </div>
-
-                    <div class="action-row">
-                        <button id="encryptBtn" class="btn btn-primary">
-                            <i class="bi bi-lock-fill"></i> Encrypt Clue
-                        </button>
-                        <button id="clearBtn" class="btn btn-outline-secondary">
-                            <i class="bi bi-arrow-counterclockwise"></i> Clear
-                        </button>
-                    </div>
+                    <div class="cth-eyebrow">Step 1</div>
+                    <h2 class="cth-panel-title">Prepare your clue</h2>
+                    <p class="cth-panel-description">
+                        Enter the message and secret key used for this treasure hunt.
+                    </p>
                 </div>
 
-                <div>
-                    <div class="info-strip mt-0">
-                        <div class="info-item">
-                            <i class="bi bi-shield-check"></i>
-                            <span>AES-256-GCM</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="bi bi-browser-chrome"></i>
-                            <span>Browser-side</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="bi bi-cloud-slash"></i>
-                            <span>No storage</span>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 p-3 rounded-4 border bg-light">
-                        <div class="fw-bold mb-1">
-                            <i class="bi bi-lightbulb me-1"></i> Treasure-hunt tip
-                        </div>
-                        <div class="small text-secondary">
-                            Place the ciphertext and key in different locations or clues so participants
-                            need to discover both before they can reveal the message.
-                        </div>
-                    </div>
+                <div class="cth-feature-icon">
+                    <i class="bi bi-pencil-square"></i>
                 </div>
             </div>
 
-            <div id="resultSection" class="result-panel d-none">
-                <div class="section-heading">
-                    <h2>Ready to distribute</h2>
-                    <p>Use either the QR code or copy the value directly.</p>
+            <div class="cth-panel-body">
+
+                <div class="desktop-two-column">
+
+                    <!-- Input form -->
+                    <div>
+                        <div class="cth-field mb-4">
+                            <label for="message" class="form-label">
+                                <i class="bi bi-chat-left-text me-1"></i>
+                                Secret Message
+                            </label>
+
+                            <textarea
+                                id="message"
+                                class="form-control"
+                                rows="6"
+                                placeholder="Enter the clue participants should discover..."
+                            ></textarea>
+
+                            <div class="input-hint">
+                                This message will be revealed after successful decryption.
+                            </div>
+                        </div>
+
+                        <div class="cth-field mb-4">
+                            <label for="key" class="form-label">
+                                <i class="bi bi-key-fill me-1"></i>
+                                Secret Key
+                            </label>
+
+                            <input
+                                type="text"
+                                id="key"
+                                class="form-control"
+                                placeholder="Enter the key participants must discover"
+                            >
+
+                            <div class="input-hint">
+                                Keep this key separate from the ciphertext during the hunt.
+                            </div>
+                        </div>
+
+                        <div class="cth-actions">
+                            <button id="encryptBtn" class="btn btn-primary">
+                                <i class="bi bi-lock-fill me-2"></i>
+                                Encrypt Clue
+                            </button>
+
+                            <button id="clearBtn" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-counterclockwise me-2"></i>
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Security information -->
+                    <div>
+                        <div class="info-strip mt-0">
+                            <div class="info-item">
+                                <i class="bi bi-shield-check"></i>
+                                <span>AES-256-GCM</span>
+                            </div>
+
+                            <div class="info-item">
+                                <i class="bi bi-browser-chrome"></i>
+                                <span>Browser-side</span>
+                            </div>
+
+                            <div class="info-item">
+                                <i class="bi bi-cloud-slash"></i>
+                                <span>No storage</span>
+                            </div>
+                        </div>
+
+                        <div class="cth-info mt-4">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="cth-feature-icon">
+                                    <i class="bi bi-lightbulb-fill"></i>
+                                </div>
+
+                                <div>
+                                    <h3 class="h6 fw-bold mb-2">
+                                        Treasure-hunt tip
+                                    </h3>
+
+                                    <p class="small text-secondary mb-0">
+                                        Place the ciphertext and key in different locations
+                                        or clues so participants must discover both before
+                                        they can reveal the message.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cth-info mt-3">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="cth-feature-icon">
+                                    <i class="bi bi-shield-lock-fill"></i>
+                                </div>
+
+                                <div>
+                                    <h3 class="h6 fw-bold mb-2">
+                                        Privacy by design
+                                    </h3>
+
+                                    <p class="small text-secondary mb-0">
+                                        The message is encrypted directly in your browser.
+                                        No message or key is uploaded to a server.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+
+            </div>
+        </section>
+
+        <!-- Generated result section -->
+        <section id="resultSection" class="result-panel d-none">
+
+            <div class="cth-panel-header">
+                <div>
+                    <div class="cth-eyebrow">Step 2</div>
+                    <h2 class="cth-panel-title">Ready to distribute</h2>
+                    <p class="cth-panel-description">
+                        Share the ciphertext and secret key as separate parts of your hunt.
+                    </p>
+                </div>
+
+                <div class="cth-feature-icon">
+                    <i class="bi bi-check2-circle"></i>
+                </div>
+            </div>
+
+            <div class="cth-panel-body">
 
                 <div class="result-grid">
+
+                    <!-- Ciphertext -->
                     <section class="result-card">
                         <div class="result-card-header">
                             <div>
-                                <h3>Ciphertext</h3>
-                                <div class="small text-secondary mt-1">Give this to participants as one part of the hunt.</div>
+                                <h3>
+                                    <i class="bi bi-file-lock2-fill me-2"></i>
+                                    Ciphertext
+                                </h3>
+
+                                <div class="small text-secondary mt-1">
+                                    Give this to participants as one part of the hunt.
+                                </div>
                             </div>
-                            <div class="result-icon"><i class="bi bi-file-lock2-fill"></i></div>
+
+                            <div class="result-icon">
+                                <i class="bi bi-file-lock2-fill"></i>
+                            </div>
                         </div>
 
-                        <textarea id="ciphertext" class="form-control readonly-output" rows="6" readonly></textarea>
+                        <textarea
+                            id="ciphertext"
+                            class="form-control readonly-output"
+                            rows="7"
+                            readonly
+                            aria-label="Generated ciphertext"
+                        ></textarea>
 
-                        <div class="action-row mt-3">
+                        <div class="cth-actions mt-3">
                             <button id="copyCipherBtn" class="btn btn-success">
-                                <i class="bi bi-clipboard"></i> Copy Ciphertext
+                                <i class="bi bi-clipboard me-2"></i>
+                                Copy Ciphertext
                             </button>
                         </div>
 
-                        <div id="cipherQr" class="qr-panel" aria-label="Ciphertext QR code"></div>
+                        <div
+                            id="cipherQr"
+                            class="qr-panel"
+                            aria-label="Ciphertext QR code"
+                        ></div>
                     </section>
 
+                    <!-- Secret key -->
                     <section class="result-card">
                         <div class="result-card-header">
                             <div>
-                                <h3>Secret Key</h3>
-                                <div class="small text-secondary mt-1">Keep this separate as the second discovery.</div>
+                                <h3>
+                                    <i class="bi bi-key-fill me-2"></i>
+                                    Secret Key
+                                </h3>
+
+                                <div class="small text-secondary mt-1">
+                                    Keep this separate as the second discovery.
+                                </div>
                             </div>
-                            <div class="result-icon"><i class="bi bi-key-fill"></i></div>
+
+                            <div class="result-icon">
+                                <i class="bi bi-key-fill"></i>
+                            </div>
                         </div>
 
-                        <input id="displayKey" class="form-control readonly-output" readonly>
+                        <input
+                            id="displayKey"
+                            class="form-control readonly-output"
+                            readonly
+                            aria-label="Generated secret key"
+                        >
 
-                        <div class="action-row mt-3">
+                        <div class="cth-actions mt-3">
                             <button id="copyKeyBtn" class="btn btn-success">
-                                <i class="bi bi-clipboard"></i> Copy Key
+                                <i class="bi bi-clipboard me-2"></i>
+                                Copy Key
                             </button>
                         </div>
 
-                        <div id="keyQr" class="qr-panel" aria-label="Secret key QR code"></div>
+                        <div
+                            id="keyQr"
+                            class="qr-panel"
+                            aria-label="Secret key QR code"
+                        ></div>
                     </section>
+
                 </div>
+
+                <div class="cth-success mt-4">
+                    <i class="bi bi-check-circle-fill me-2"></i>
+                    Your clue was encrypted successfully. Distribute the ciphertext
+                    and key separately for the best treasure-hunt experience.
+                </div>
+
             </div>
         </section>
+
     </main>
 
     <footer>
         <div class="footer-title">Cryptographic Treasure Hunt</div>
         <div>Powered by AES-256-GCM • Client-side encryption</div>
     </footer>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <script type="module" src="./app.js"></script>
 </body>
 </html>
