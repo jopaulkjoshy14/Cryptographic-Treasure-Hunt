@@ -4,165 +4,371 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#315efb">
+
     <title>Participant Portal | Cryptographic Treasure Hunt</title>
 
     <link rel="icon" href="../assets/favicon.ico">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+        rel="stylesheet"
+    >
+
     <link rel="stylesheet" href="../shared/styles.css">
 </head>
 
 <body>
 <div class="page-shell">
 
-    <div class="brand-bar">
-        <div class="brand">
-            <div class="brand-mark"><i class="bi bi-shield-lock-fill"></i></div>
-            <span>Cryptographic Treasure Hunt</span>
-        </div>
-        <div class="role-badge">
-            <i class="bi bi-person-fill"></i>
-            Participant Portal
-        </div>
-    </div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg cth-navbar" aria-label="Main navigation">
+        <div class="container-fluid px-0">
 
-    <main class="hero-card">
-        <section class="hero">
-            <div class="hero-content">
-                <div class="hero-eyebrow">
+            <a class="navbar-brand cth-brand" href="../index.html">
+                <span class="cth-brand-icon">
+                    <i class="bi bi-shield-lock-fill"></i>
+                </span>
+
+                <span>
+                    <span class="cth-brand-text">Cryptographic Treasure Hunt</span>
+                    <span class="cth-brand-subtitle">Secure clue discovery</span>
+                </span>
+            </a>
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavigation"
+                aria-controls="mainNavigation"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <i class="bi bi-list"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavigation">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+
+                    <li class="nav-item">
+                        <a class="nav-link cth-nav-link" href="../index.html">
+                            <i class="bi bi-grid-1x2-fill me-1"></i>
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link cth-nav-link" href="../organizer/index.html">
+                            <i class="bi bi-person-gear me-1"></i>
+                            Organizer
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link cth-nav-link active"
+                            href="./index.html"
+                            aria-current="page"
+                        >
+                            <i class="bi bi-person-check-fill me-1"></i>
+                            Participant
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link cth-nav-link" href="../about/index.html">
+                            <i class="bi bi-info-circle-fill me-1"></i>
+                            About
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page content -->
+    <main class="page-content">
+
+        <!-- Hero -->
+        <section class="cth-page-hero">
+            <div>
+                <div class="cth-eyebrow">
                     <i class="bi bi-search"></i>
-                    Treasure Decoder
+                    Participant workspace
                 </div>
+
                 <h1>Unlock the next clue</h1>
+
                 <p>
-                    Find both pieces of the puzzle: the ciphertext and the secret key.
+                    Find both pieces of the puzzle—the ciphertext and the secret key.
                     Enter them manually or scan their QR codes, then decrypt the clue.
                 </p>
             </div>
+
+            <div class="cth-page-hero-badge">
+                <i class="bi bi-unlock-fill"></i>
+                <span>Reveal securely</span>
+            </div>
         </section>
 
-        <section class="card-body">
-            <div class="section-heading">
-                <h2>Enter your discoveries</h2>
-                <p>You need both the encrypted clue and its matching key.</p>
-            </div>
+        <!-- Input panel -->
+        <section class="cth-panel">
 
-            <div class="desktop-two-column">
+            <div class="cth-panel-header">
                 <div>
-                    <div class="mb-4">
-                        <label class="form-label" for="ciphertext">
-                            <i class="bi bi-file-lock2 me-1"></i> Ciphertext
-                        </label>
-                        <textarea id="ciphertext" class="form-control" rows="6"
-                                  placeholder="Paste or scan the ciphertext..."></textarea>
-                        <div class="action-row mt-2">
-                            <button id="pasteCipherBtn" class="btn btn-outline-primary">
-                                <i class="bi bi-clipboard"></i> Paste
-                            </button>
-                            <button id="scanCipherBtn" class="btn btn-outline-success">
-                                <i class="bi bi-qr-code-scan"></i> Scan QR
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="form-label" for="key">
-                            <i class="bi bi-key-fill me-1"></i> Secret Key
-                        </label>
-                        <input id="key" class="form-control"
-                               placeholder="Enter or scan the secret key">
-                        <div class="action-row mt-2">
-                            <button id="pasteKeyBtn" class="btn btn-outline-primary">
-                                <i class="bi bi-clipboard"></i> Paste
-                            </button>
-                            <button id="scanKeyBtn" class="btn btn-outline-success">
-                                <i class="bi bi-qr-code-scan"></i> Scan QR
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="action-row">
-                        <button id="decryptBtn" class="btn btn-primary">
-                            <i class="bi bi-unlock-fill"></i> Decrypt Clue
-                        </button>
-                        <button id="clearBtn" class="btn btn-outline-secondary">
-                            <i class="bi bi-arrow-counterclockwise"></i> Clear
-                        </button>
-                    </div>
+                    <div class="cth-eyebrow">Step 1</div>
+                    <h2 class="cth-panel-title">Enter your discoveries</h2>
+                    <p class="cth-panel-description">
+                        You need both the encrypted clue and its matching secret key.
+                    </p>
                 </div>
 
-                <div>
-                    <div class="info-strip mt-0">
-                        <div class="info-item">
-                            <i class="bi bi-qr-code-scan"></i>
-                            <span>Scan or paste</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="bi bi-shield-lock"></i>
-                            <span>AES-256-GCM</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="bi bi-stars"></i>
-                            <span>Reveal clue</span>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 p-3 rounded-4 border bg-light">
-                        <div class="fw-bold mb-1">
-                            <i class="bi bi-info-circle me-1"></i> How to play
-                        </div>
-                        <div class="small text-secondary">
-                            Discover the ciphertext and key separately, bring both here,
-                            and decrypt them together to reveal your next clue.
-                        </div>
-                    </div>
+                <div class="cth-feature-icon">
+                    <i class="bi bi-puzzle-fill"></i>
                 </div>
             </div>
 
-            <!-- QR Scanner Modal -->
-            <div class="modal fade" id="scannerModal" tabindex="-1"
-                 aria-labelledby="scannerModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div>
-                                <h5 class="modal-title" id="scannerModalLabel">Scan QR Code</h5>
-                                <div class="small text-secondary">Point your camera at the discovered QR code.</div>
+            <div class="cth-panel-body">
+
+                <div class="desktop-two-column">
+
+                    <!-- Input controls -->
+                    <div>
+
+                        <div class="cth-field mb-4">
+                            <label class="form-label" for="ciphertext">
+                                <i class="bi bi-file-lock2 me-1"></i>
+                                Ciphertext
+                            </label>
+
+                            <textarea
+                                id="ciphertext"
+                                class="form-control"
+                                rows="7"
+                                placeholder="Paste or scan the ciphertext..."
+                            ></textarea>
+
+                            <div class="input-hint">
+                                Enter the encrypted clue provided during the hunt.
                             </div>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body p-3">
-                            <div id="reader" class="w-100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Result -->
-            <div id="resultSection" class="d-none">
-                <div class="success-result">
-                    <div class="d-flex align-items-start gap-3">
-                        <div class="result-icon">
-                            <i class="bi bi-unlock-fill"></i>
+                            <div class="cth-actions mt-3">
+                                <button
+                                    id="pasteCipherBtn"
+                                    class="btn btn-outline-primary"
+                                >
+                                    <i class="bi bi-clipboard me-2"></i>
+                                    Paste
+                                </button>
+
+                                <button
+                                    id="scanCipherBtn"
+                                    class="btn btn-outline-success"
+                                >
+                                    <i class="bi bi-qr-code-scan me-2"></i>
+                                    Scan QR
+                                </button>
+                            </div>
                         </div>
-                        <div>
-                            <h3>🎉 Congratulations!</h3>
-                            <p class="mb-0 text-secondary">
-                                You found both pieces and successfully decrypted the clue.
-                            </p>
+
+                        <div class="cth-field mb-4">
+                            <label class="form-label" for="key">
+                                <i class="bi bi-key-fill me-1"></i>
+                                Secret Key
+                            </label>
+
+                            <input
+                                id="key"
+                                class="form-control"
+                                placeholder="Enter or scan the secret key"
+                            >
+
+                            <div class="input-hint">
+                                Enter the matching key discovered elsewhere in the hunt.
+                            </div>
+
+                            <div class="cth-actions mt-3">
+                                <button
+                                    id="pasteKeyBtn"
+                                    class="btn btn-outline-primary"
+                                >
+                                    <i class="bi bi-clipboard me-2"></i>
+                                    Paste
+                                </button>
+
+                                <button
+                                    id="scanKeyBtn"
+                                    class="btn btn-outline-success"
+                                >
+                                    <i class="bi bi-qr-code-scan me-2"></i>
+                                    Scan QR
+                                </button>
+                            </div>
                         </div>
+
+                        <div class="cth-actions">
+                            <button id="decryptBtn" class="btn btn-primary">
+                                <i class="bi bi-unlock-fill me-2"></i>
+                                Decrypt Clue
+                            </button>
+
+                            <button id="clearBtn" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-counterclockwise me-2"></i>
+                                Clear
+                            </button>
+                        </div>
+
                     </div>
 
-                    <div id="messageOutput" class="message-output"></div>
+                    <!-- Instructions -->
+                    <div>
+
+                        <div class="info-strip mt-0">
+                            <div class="info-item">
+                                <i class="bi bi-qr-code-scan"></i>
+                                <span>Scan or paste</span>
+                            </div>
+
+                            <div class="info-item">
+                                <i class="bi bi-shield-lock"></i>
+                                <span>AES-256-GCM</span>
+                            </div>
+
+                            <div class="info-item">
+                                <i class="bi bi-stars"></i>
+                                <span>Reveal clue</span>
+                            </div>
+                        </div>
+
+                        <div class="cth-info mt-4">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="cth-feature-icon">
+                                    <i class="bi bi-info-circle-fill"></i>
+                                </div>
+
+                                <div>
+                                    <h3 class="h6 fw-bold mb-2">
+                                        How to play
+                                    </h3>
+
+                                    <p class="small text-secondary mb-0">
+                                        Discover the ciphertext and key separately,
+                                        bring both here, and decrypt them together
+                                        to reveal your next clue.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cth-info mt-3">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="cth-feature-icon">
+                                    <i class="bi bi-camera-fill"></i>
+                                </div>
+
+                                <div>
+                                    <h3 class="h6 fw-bold mb-2">
+                                        Use QR scanning
+                                    </h3>
+
+                                    <p class="small text-secondary mb-0">
+                                        If the organizer provides QR codes, scan them
+                                        directly instead of typing the values manually.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
+
             </div>
         </section>
+
+        <!-- QR Scanner Modal -->
+        <div
+            class="modal fade"
+            id="scannerModal"
+            tabindex="-1"
+            aria-labelledby="scannerModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <div>
+                            <h5 class="modal-title" id="scannerModalLabel">
+                                <i class="bi bi-qr-code-scan me-2"></i>
+                                Scan QR Code
+                            </h5>
+
+                            <div class="small text-secondary">
+                                Point your camera at the discovered QR code.
+                            </div>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+
+                    <div class="modal-body p-3">
+                        <div id="reader" class="w-100"></div>
+
+                        <div class="small text-secondary text-center mt-3">
+                            Allow camera access if your browser requests permission.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Decryption result -->
+        <section id="resultSection" class="d-none">
+
+            <div class="success-result">
+                <div class="d-flex align-items-start gap-3">
+
+                    <div class="result-icon">
+                        <i class="bi bi-unlock-fill"></i>
+                    </div>
+
+                    <div>
+                        <div class="cth-eyebrow">Step 2</div>
+
+                        <h3>🎉 Congratulations!</h3>
+
+                        <p class="mb-0 text-secondary">
+                            You found both pieces and successfully decrypted the clue.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div id="messageOutput" class="message-output"></div>
+            </div>
+
+        </section>
+
     </main>
 
     <footer>
         <div class="footer-title">Cryptographic Treasure Hunt</div>
         <div>Powered by AES-256-GCM • Client-side decryption</div>
     </footer>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
