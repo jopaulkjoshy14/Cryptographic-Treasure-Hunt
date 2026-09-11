@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cryptographic Treasure Hunt</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="./shared/styles.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg cth-navbar">
+        <div class="container">
+            <a class="cth-brand" href="./index.html">
+                <span class="cth-brand-icon">
+                    <i class="bi bi-shield-lock-fill"></i>
+                </span>
+
+                <span class="cth-brand-text">
+                    Cryptographic Treasure Hunt
+                    <small class="cth-brand-subtitle">
+                        Secure messages. Hidden discoveries.
+                    </small>
+                </span>
+            </a>
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavigation"
+                aria-controls="mainNavigation"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavigation">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link cth-nav-link active" href="./index.html">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link cth-nav-link" href="./organizer/index.html">
+                            <i class="bi bi-key-fill"></i>
+                            Organizer
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link cth-nav-link" href="./participant/index.html">
+                            <i class="bi bi-unlock-fill"></i>
+                            Participant
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link cth-nav-link" href="./about/index.html">
+                            <i class="bi bi-info-circle-fill"></i>
+                            About
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- Hero -->
+        <section class="cth-page-hero">
+            <div class="page-container">
+                <span class="cth-eyebrow">
+                    <i class="bi bi-stars"></i>
+                    Privacy-focused message game
+                </span>
+
+                <h1>
+                    Hide a message.<br>
+                    Share the secret. Discover the treasure.
+                </h1>
+
+                <p>
+                    Cryptographic Treasure Hunt is a simple browser-based
+                    application that uses AES-256-GCM encryption to protect
+                    messages before they are shared.
+                </p>
+            </div>
+        </section>
+
+        <!-- Main choices -->
+        <section class="page-container pb-4">
+            <div class="section-heading">
+                <h2 class="section-title">Choose your role</h2>
+                <p class="section-description">
+                    Start a new treasure hunt or use the encrypted clue
+                    provided by an organizer.
+                </p>
+            </div>
+
+            <div class="cth-feature-grid">
+
+                <!-- Organizer -->
+                <article class="cth-feature-card">
+                    <span class="cth-feature-label">
+                        <i class="bi bi-1-circle-fill"></i>
+                        Create a hunt
+                    </span>
+
+                    <div class="cth-feature-icon">
+                        <i class="bi bi-key-fill"></i>
+                    </div>
+
+                    <h2>Organizer</h2>
+
+                    <p>
+                        Enter a secret message and generate encrypted
+                        ciphertext together with the key required to
+                        unlock it later.
+                    </p>
+
+                    <a
+                        href="./organizer/index.html"
+                        class="btn btn-primary"
+                    >
+                        Open Organizer
+                        <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+                </article>
+
+                <!-- Participant -->
+                <article class="cth-feature-card">
+                    <span class="cth-feature-label">
+                        <i class="bi bi-2-circle-fill"></i>
+                        Discover a hunt
+                    </span>
+
+                    <div class="cth-feature-icon success">
+                        <i class="bi bi-unlock-fill"></i>
+                    </div>
+
+                    <h2>Participant</h2>
+
+                    <p>
+                        Enter or scan the encrypted clue and its key,
+                        then decrypt the message directly in your browser.
+                    </p>
+
+                    <a
+                        href="./participant/index.html"
+                        class="btn btn-outline-success"
+                    >
+                        Open Participant
+                        <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- How it works -->
+        <section class="page-container py-4">
+            <div class="section-heading">
+                <h2 class="section-title">How it works</h2>
+                <p class="section-description">
+                    The application keeps the encryption and decryption
+                    process inside the browser.
+                </p>
+            </div>
+
+            <div class="cth-step-grid">
+
+                <article class="cth-step-card">
+                    <div class="cth-step-number">1</div>
+                    <h3>Write a message</h3>
+                    <p>
+                        The organizer enters the message that should remain
+                        hidden.
+                    </p>
+                </article>
+
+                <article class="cth-step-card">
+                    <div class="cth-step-number">2</div>
+                    <h3>Encrypt locally</h3>
+                    <p>
+                        AES-256-GCM encrypts the message in the organizer's
+                        browser.
+                    </p>
+                </article>
+
+                <article class="cth-step-card">
+                    <div class="cth-step-number">3</div>
+                    <h3>Share the clue</h3>
+                    <p>
+                        The organizer shares the ciphertext and key with
+                        the participant.
+                    </p>
+                </article>
+
+                <article class="cth-step-card">
+                    <div class="cth-step-number">4</div>
+                    <h3>Reveal the treasure</h3>
+                    <p>
+                        The participant decrypts the ciphertext locally to
+                        reveal the original message.
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Privacy note -->
+        <section class="page-container py-4">
+            <div class="cth-info">
+                <i class="bi bi-shield-check"></i>
+
+                <div>
+                    <strong>Privacy by design:</strong>
+                    encryption and decryption happen in the browser.
+                    The application does not require a backend server
+                    to process the secret message.
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="cth-footer">
+        <div class="page-container">
+            <div class="cth-footer-inner">
+                <div>
+                    <span class="footer-title">
+                        Cryptographic Treasure Hunt
+                    </span>
+                    <span class="d-block mt-1">
+                        A browser-based cryptographic puzzle experience.
+                    </span>
+                </div>
+
+                <div>
+                    <a href="./about/index.html">
+                        Learn more
+                        <i class="bi bi-arrow-up-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
