@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#315efb">
+
+    <title>About | Cryptographic Treasure Hunt</title>
+
+    <link rel="icon" href="../assets/favicon.ico">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../shared/styles.css">
+</head>
+
+<body>
+<div class="page-shell">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg cth-navbar" aria-label="Main navigation">
+        <div class="container-fluid px-0">
+
+            <a class="navbar-brand cth-brand" href="../index.html">
+                <span class="cth-brand-icon">
+                    <i class="bi bi-shield-lock-fill"></i>
+                </span>
+
+                <span>
+                    <span class="cth-brand-text">Cryptographic Treasure Hunt</span>
+                    <span class="cth-brand-subtitle">Secure clue discovery</span>
+                </span>
+            </a>
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavigation"
+                aria-controls="mainNavigation"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <i class="bi bi-list"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavigation">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+
+                    <li class="nav-item">
+                        <a class="nav-link cth-nav-link" href="../index.html">
+                            <i class="bi bi-grid-1x2-fill me-1"></i>
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link cth-nav-link" href="../organizer/index.html">
+                            <i class="bi bi-person-gear me-1"></i>
+                            Organizer
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link cth-nav-link" href="../participant/index.html">
+                            <i class="bi bi-person-check-fill me-1"></i>
+                            Participant
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link cth-nav-link active"
+                            href="./index.html"
+                            aria-current="page"
+                        >
+                            <i class="bi bi-info-circle-fill me-1"></i>
+                            About
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page content -->
+    <main class="page-content">
+
+        <!-- Hero -->
+        <section class="cth-page-hero">
+            <div>
+                <div class="cth-eyebrow">
+                    <i class="bi bi-shield-lock-fill"></i>
+                    About the project
+                </div>
+
+                <h1>Security meets adventure</h1>
+
+                <p>
+                    Cryptographic Treasure Hunt combines a traditional treasure hunt
+                    with browser-based encryption, allowing participants to discover
+                    and unlock clues through a secure cryptographic workflow.
+                </p>
+            </div>
+
+            <div class="cth-page-hero-badge">
+                <i class="bi bi-stars"></i>
+                <span>Discover. Decrypt. Advance.</span>
+            </div>
+        </section>
+
+        <!-- Project overview -->
+        <section class="cth-panel">
+
+            <div class="cth-panel-header">
+                <div>
+                    <div class="cth-eyebrow">Project overview</div>
+                    <h2 class="cth-panel-title">How Cryptographic Treasure Hunt works</h2>
+                    <p class="cth-panel-description">
+                        The system separates the encrypted message from the key,
+                        making the hunt more interactive and challenging.
+                    </p>
+                </div>
+
+                <div class="cth-feature-icon">
+                    <i class="bi bi-diagram-3-fill"></i>
+                </div>
+            </div>
+
+            <div class="cth-panel-body">
+
+                <div class="cth-step-grid">
+
+                    <div class="cth-step-card">
+                        <div class="cth-step-number">1</div>
+                        <div>
+                            <h3>Organizer creates a clue</h3>
+                            <p>
+                                The organizer enters a secret message and a secret key
+                                into the organizer portal.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="cth-step-card">
+                        <div class="cth-step-number">2</div>
+                        <div>
+                            <h3>The clue is encrypted</h3>
+                            <p>
+                                AES-256-GCM encrypts the message directly inside
+                                the organizer’s browser.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="cth-step-card">
+                        <div class="cth-step-number">3</div>
+                        <div>
+                            <h3>Both parts are distributed</h3>
+                            <p>
+                                The ciphertext and secret key can be shared separately
+                                using text or QR codes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="cth-step-card">
+                        <div class="cth-step-number">4</div>
+                        <div>
+                            <h3>Participant reveals the clue</h3>
+                            <p>
+                                After discovering both values, the participant decrypts
+                                the message in the participant portal.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Security principles -->
+        <section class="cth-panel">
+
+            <div class="cth-panel-header">
+                <div>
+                    <div class="cth-eyebrow">Security principles</div>
+                    <h2 class="cth-panel-title">Designed for local processing</h2>
+                    <p class="cth-panel-description">
+                        The application focuses on keeping the cryptographic workflow
+                        inside the user’s browser.
+                    </p>
+                </div>
+
+                <div class="cth-feature-icon">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+            </div>
+
+            <div class="cth-panel-body">
+
+                <div class="row g-4">
+
+                    <div class="col-md-6">
+                        <div class="cth-info h-100">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="cth-feature-icon">
+                                    <i class="bi bi-browser-chrome"></i>
+                                </div>
+
+                                <div>
+                                    <h3 class="h6 fw-bold mb-2">
+                                        Client-side encryption
+                                    </h3>
+
+                                    <p class="small text-secondary mb-0">
+                                        The secret message is encrypted within the browser
+                                        before the resulting ciphertext is distributed.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="cth-info h-100">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="cth-feature-icon">
+                                    <i class="bi bi-lock-fill"></i>
+                                </div>
+
+                                <div>
+                                    <h3 class="h6 fw-bold mb-2">
+                                        AES-256-GCM
+                                    </h3>
+
+                                    <p class="small text-secondary mb-0">
+                                        AES-256-GCM provides authenticated encryption,
+                                        helping protect the confidentiality and integrity
+                                        of the clue.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="cth-info h-100">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="cth-feature-icon">
+                                    <i class="bi bi-cloud-slash"></i>
+                                </div>
+
+                                <div>
+                                    <h3 class="h6 fw-bold mb-2">
+                                        No server storage
+                                    </h3>
+
+                                    <p class="small text-secondary mb-0">
+                                        The application does not require a server to
+                                        store the plaintext message or secret key.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="cth-info h-100">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="cth-feature-icon">
+                                    <i class="bi bi-qr-code-scan"></i>
+                                </div>
+
+                                <div>
+                                    <h3 class="h6 fw-bold mb-2">
+                                        QR-enabled discovery
+                                    </h3>
+
+                                    <p class="small text-secondary mb-0">
+                                        Ciphertext and keys can be represented as QR codes
+                                        for convenient physical or digital clue placement.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Technology section -->
+        <section class="cth-panel">
+
+            <div class="cth-panel-header">
+                <div>
+                    <div class="cth-eyebrow">Technology</div>
+                    <h2 class="cth-panel-title">Built with web technologies</h2>
+                    <p class="cth-panel-description">
+                        The project uses lightweight browser technologies to keep
+                        the experience simple and portable.
+                    </p>
+                </div>
+
+                <div class="cth-feature-icon">
+                    <i class="bi bi-code-slash"></i>
+                </div>
+            </div>
+
+            <div class="cth-panel-body">
+
+                <div class="row g-3">
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="cth-feature-card h-100">
+                            <div class="cth-feature-icon">
+                                <i class="bi bi-filetype-html"></i>
+                            </div>
+                            <h3>HTML</h3>
+                            <p>
+                                Provides the structure for each portal and page.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="cth-feature-card h-100">
+                            <div class="cth-feature-icon">
+                                <i class="bi bi-filetype-css"></i>
+                            </div>
+                            <h3>CSS</h3>
+                            <p>
+                                Creates the responsive visual design and layout.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="cth-feature-card h-100">
+                            <div class="cth-feature-icon">
+                                <i class="bi bi-filetype-js"></i>
+                            </div>
+                            <h3>JavaScript</h3>
+                            <p>
+                                Handles encryption, decryption, QR scanning,
+                                and user interactions.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="cth-feature-card h-100">
+                            <div class="cth-feature-icon">
+                                <i class="bi bi-bootstrap-fill"></i>
+                            </div>
+                            <h3>Bootstrap</h3>
+                            <p>
+                                Supports responsive components and mobile-friendly
+                                navigation.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-title">Cryptographic Treasure Hunt</div>
+        <div>Powered by AES-256-GCM • Client-side encryption</div>
+    </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
