@@ -4,6 +4,10 @@ A browser-based cryptographic treasure hunt platform that enables organizers to 
 
 The project is designed for interactive events such as youth camps, educational activities, escape rooms, STEM workshops, and cybersecurity demonstrations.
 
+## 🌐 Live Demo
+
+👉 [**Launch Cryptographic Treasure Hunt**](https://cryptographic-treasure-hunt.onrender.com)
+
 ## ✨ Features
 
 ### Organizer Portal
